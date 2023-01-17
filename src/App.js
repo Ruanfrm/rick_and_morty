@@ -2,14 +2,17 @@ import { useState, useEffect, useLocation } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { Typography } from '@mui/material'
 import { BsGithub } from "react-icons/bs"
+import Search from './components/Search';
 
 function App() {
 
   const [personagens, setPersonagem] = useState([]);
   const [page, setPage] = useState(1);
-  // CONSUMO DE API
+  const [name, setName] = useState("")
+  
 
-  const api = `https://rickandmortyapi.com/api/character/?page=${page}`
+  // CONSUMO DE API
+  const api = `https://rickandmortyapi.com/api/character/?page=${page}&name=${name}`
 
   useEffect(() => {
     fetch(api)
@@ -28,10 +31,17 @@ function App() {
   };
 
   return (
+    // Logo
     <div className="container">
       <header>
         <div className='logo'><img src="/Rick_and_Morty.svg" alt="logo rick and morty" /></div>
         </header>
+        {/* end Logo */}
+        {/* search */}
+          <Search setName={setName}/>
+        {/* end search */}
+
+        {/* conteúdo */}
       <div className='area-container'>
         {personagens.map(personagem => {
           return (
